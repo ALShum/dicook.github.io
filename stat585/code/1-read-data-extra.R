@@ -71,22 +71,30 @@ head(newpbi.m)
 qplot(Species, Count, data=newpbi.m) + coord_flip()
 
 # html
+library(XML)
 src ="http://www.realclearpolitics.com/epolls/2012/president/us/republican_presidential_nomination-1452.html"
-doc <- htmlParse(src)
-str(doc)  # very terse
-print(doc)
-length(getNodeSet(doc, "//table"))
-tables <- getNodeSet(doc, "//table")
-table15 <- getNodeSet(tables[[15]], "tr")
-length(table15)
+tables <- readHTMLTable(src)
+library(plyr)
+ldply(tables, dim)
 
-table15[[1]]
-table15[[2]]
-table15[2:10]
 
-header <- sapply(getNodeSet(table15[[1]], "th"), xmlValue)
-rows <- t(sapply(table15[-1],function(x) xpathSApply(x,"td", xmlValue)))
-polls <- data.frame(rows)
-names(polls) <- header
-summary(polls) # still some work to do ...
-head(polls)
+## ------------------------------------------------------------------------
+polls <- tables[[15]]
+head(polls) # still some work to do ...
+
+
+## ------------------------------------------------------------------------
+library(foreign)
+knights <- read.spss("../data/knightfoundation2008sotcdata.por")
+str(knights)
+
+
+## ------------------------------------------------------------------------
+library(devtools)
+install_github("cbapi", "heike")
+library(cbapi)
+setkey("7f784587c3918611ad6ca67188d9b269b3558dd4") # my key - if you want to use this, get your own :)
+# population based on 2010 Census:
+popstate <- read.census(sprintf("http://api.census.gov/data/2010/sf1?key=%s&get=P0010001,NAME&for=state:*", getkey()))
+head(popstate)
+
