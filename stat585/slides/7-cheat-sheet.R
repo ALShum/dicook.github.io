@@ -1,3 +1,17 @@
+extractPolygons <- function(shapes) {
+  require(plyr)
+  
+  dframe <- ldply(1:length(shapes@polygons), function(i) {
+    ob <- shapes@polygons[[i]]@Polygons
+    dframe <- ldply(1:length(ob), function(j) {
+      x <- ob[[j]]
+      co <- x@coords
+      data.frame(co, order=1:nrow(co), group=j)
+    })
+    dframe$region <- i
+    dframe
+  })
+  
 oz <- extractPolygons(xxx)
 xx@data$elec_id <- 1:150
 
