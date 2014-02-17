@@ -16,7 +16,10 @@ options(width=80)
 Outline
 ====
 
-* ```dplyr``` package
+* ```dplyr``` package:
+* ```mutate, arrange, select, filter, summarise```
+* ```group_by```
+* ```dplyr``` with databases
 
 
 Data for now
