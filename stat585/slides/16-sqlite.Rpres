@@ -13,6 +13,19 @@ opts_chunk$set(cache=TRUE)
 options(width=80)
 ```
 
+Helping out Karsten
+===
+
+We need to figure out at what stage the database sampler Karsten implemented breaks.
+
+* For that, go to  shiny1.stat.iastate.edu/karstenm
+* select the link to the ShinyDatabaseSampler  
+* on the webpage, select the "Census" database, and "stratified sampling", and set the number of draws to 100  per stratum. 
+*  click the "Get My Sample" button. 
+
+The rest is just Alen watching to see what breaks. 
+Thank you!
+
 Getting ready
 ====
 
